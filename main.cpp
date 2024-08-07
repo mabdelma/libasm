@@ -6,7 +6,7 @@
 /*   By: mabdelma <mabdelma@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 14:20:21 by mabdelma          #+#    #+#             */
-/*   Updated: 2024/08/06 14:43:58 by mabdelma         ###   ########.fr       */
+/*   Updated: 2024/08/07 19:04:19 by mabdelma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,14 @@ int		main(void)
 	READ(buffer, 0)
 	printf("-done\n");
 
-	printf("\n--ft_strdup\n");
-	tmp2 = ft_strdup("toto");
+	tmp2 = strdup("Medo");
+	printf("\n-ft_strdup\n");
 	tmp = ft_strdup(tmp2); 
-	printf("%s (%s)\n", tmp, tmp2); 
-	free(tmp);
-	free(tmp2);
+	
+	printf("%s:%s\n", tmp2, tmp); 
 	printf("-done\n");
+	free(tmp2);
+	free(tmp);
 
 	return (0);
 }

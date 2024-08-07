@@ -1,9 +1,15 @@
 			section	.text
-			global	_ft_read
+			global	ft_read
+			extern 	error
 
-; delete all unpreserved registers by _read
-
-_ft_read:								; fd = rdi, buffer = rsi, bytes = rdx
+ft_read:								; fd = rdi, buffer = rsi, bytes = rdx
 			mov		rax, 0x2000003
 			syscall
+			jc falta
+			ret
+falta:
+    		push rax
+			call	error
+			pop qword[rax]
+			mov rax, -1
 			ret

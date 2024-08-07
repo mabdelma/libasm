@@ -6,9 +6,12 @@
 /*   By: mabdelma <mabdelma@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 14:22:06 by mabdelma          #+#    #+#             */
-/*   Updated: 2024/08/06 14:39:09 by mabdelma         ###   ########.fr       */
+/*   Updated: 2024/08/07 18:35:52 by mabdelma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef LIBASM_HPP_
+#define LIBASM_HPP_
 
 #include <stdlib.h>
 #include <unistd.h>
@@ -22,6 +25,7 @@
 # define READ(b, x)			r = ft_read(STDIN_FILENO, buffer, x); printf("`%s`:%ld\n", buffer, r);
 # define DUP(s)				tmp = ft_strdup(s); printf("%s (%s)\n", tmp, s); free(tmp); tmp = "";
 
+extern "C" {
 
 int		    ft_strlen(char const *str);
 int		    ft_strcmp(char const *s1, char const *s2);
@@ -29,3 +33,6 @@ char	    *ft_strcpy(char *dst, char const *src);
 ssize_t	    ft_write(int fd, void const *buf, size_t nbyte);
 ssize_t	    ft_read(int fd, void *buf, size_t nbyte);
 char	    *ft_strdup(char const *s1);
+}
+
+#endif

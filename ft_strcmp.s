@@ -1,7 +1,7 @@
 			section	.text
-			global	_ft_strcmp
+			global	ft_strcmp
 
-_ft_strcmp:									; s1 = rdi, s2 = rsi
+ft_strcmp:									; s1 = rdi, s2 = rsi
 			and		rcx, 0					; i = 0
 			and		rdx, 0					; cmp = 0
 			cmp		rdi, 0					; !s1

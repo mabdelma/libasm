@@ -1,7 +1,7 @@
 			section	.text
-			global	_ft_strcpy
+			global	ft_strcpy
 
-_ft_strcpy:									; dst starting address = rdi, src starting address = rsi
+ft_strcpy:									; dst starting address = rdi, src starting address = rsi
 			and		rcx, 0					; count = 0
 			and		rdx, 0					; tmp = 0
 			cmp		rsi, 0					; if(src == 0)

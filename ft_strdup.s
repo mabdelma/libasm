@@ -1,40 +1,26 @@
-			section	.text
-			global	_ft_strdup
-			extern	_malloc
+global ft_strdup
+extern malloc, ft_strlen, ft_strcpy
+section .text                       ; rdi = string
+ft_strdup:
+    xor rax, rax                    ; rax = 0
+    push rdi                        ; save the string on the top of the stack frame
+    call ft_strlen                 ; rax = len of the rdi string
+    inc rax                         ; rax++ (\0)
+    mov rdi, rax                    ; move the length of the string to the rdi for allocation
+    call malloc                    ; allocate memory, resulting pointer is in the rax wrt ..plt - linux routine for external calls
+    cmp rax, 0                      ; check if the result of the allocation == NULL
+    je nullptr                      ; if yes, return the null pointer  
+    pop rdi
+    mov rsi, rdi
+    mov rdi, rax
+    call ft_strcpy
+    ret
 
-_ft_strdup:									; rdi = src starting address
-			cmp		rdi, 0
-			jz		error					; conditional jump if(src == 0)
-inicio:
-			and		rcx, 0				; count = 0
-			jmp		tamano
-incrementar:
-			inc		rcx						; count++
-tamano:
-			cmp		BYTE [rdi + rcx], 0		; if(str[count] != 0)
-			jne		incrementar
+nullptr:
+    xor rax, rax                    ; rax = 0
+    ret                             ; return NULL
+
+
+
+
 			
-comienzo_malloc:
-			inc		rcx						; length++
-			push	rdi						; save src
-			mov		rdi, rcx
-			call	_malloc					; rax = _malloc(length)
-			pop		rdi						; restore src
-			cmp		rax, 0
-			jz		error					; malloc vuelta NULL
-comienzo_a_copiar:
-			and		rcx, 0				; i = 0
-			and		rdx, 0				; tmp = 0
-			jmp		copiando
-incrementando:
-			inc		rcx
-copiando:
-			mov		dl, BYTE [rdi + rcx]
-			mov		BYTE [rax + rcx], dl
-			cmp		dl, 0
-			jnz		incrementando
-			jmp		vuelta
-error:
-			and		rax, 0
-vuelta:
-			ret
