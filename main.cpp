@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabdelma <mabdelma@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: mabdelma <m.abdelmaged@student.42abudha    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 14:20:21 by mabdelma          #+#    #+#             */
-/*   Updated: 2024/08/07 19:04:19 by mabdelma         ###   ########.fr       */
+/*   Updated: 2024/08/09 15:03:50 by mabdelma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,6 @@ int		main(void)
 	WRITE("toto", 2L)
 	printf("-done\n");
 
-	printf("\n--read (Makefile)\n");
-	READ(buffer, 50)
-	READ(buffer, 25)
-	READ(buffer, 4)
-	READ(buffer, 26)
-	READ(buffer, 14)
-	READ(buffer, 0)
-	printf("-done\n");
-
 	tmp2 = strdup("Medo");
 	printf("\n-ft_strdup\n");
 	tmp = ft_strdup(tmp2); 
@@ -76,6 +67,15 @@ int		main(void)
 	printf("-done\n");
 	free(tmp2);
 	free(tmp);
+	
+	printf("\n--read (Makefile)\n");
+	READ(buffer, 50)
+	READ(buffer, 25)
+	READ(buffer, 4)
+	READ(buffer, 26)
+	READ(buffer, 14)
+	READ(buffer, 0)
+	printf("-done\n");
 
 	return (0);
 }

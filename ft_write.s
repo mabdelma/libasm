@@ -9,7 +9,11 @@
 ;what was successfully written it got stored in "rax" register
 
 ft_write:
-			mov		rax, 0x2000004
+			cmp		rdi, 0x0
+			jz		falta
+			cmp		rsi, 0
+			jz		falta
+			mov		rax, 1
 			syscall
 			jc falta
 			ret

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mabdelma <mabdelma@student.42abudhabi.ae>  +#+  +:+       +#+         #
+#    By: mabdelma <m.abdelmaged@student.42abudha    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/07 19:03:46 by mabdelma          #+#    #+#              #
-#    Updated: 2024/08/07 19:03:48 by mabdelma         ###   ########.fr        #
+#    Updated: 2024/08/09 12:26:06 by mabdelma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 

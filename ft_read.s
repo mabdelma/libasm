@@ -2,8 +2,8 @@
 			global	ft_read
 			extern 	error
 
-ft_read:								; fd = rdi, buffer = rsi, bytes = rdx
-			mov		rax, 0x2000003
+ft_read:	; fd = rdi, buffer = rsi, bytes = rdx
+			mov		rax, 0x0
 			syscall
 			jc falta
 			ret
