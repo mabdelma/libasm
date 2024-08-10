@@ -1,26 +1,59 @@
 global ft_strdup
-extern malloc, ft_strlen, ft_strcpy
-section .text                       ; rdi = string
+extern malloc
+extern ft_strlen
+extern ft_strcpy
+
+section .text
+
 ft_strdup:
-    xor rax, rax                    ; rax = 0
-    push rdi                        ; save the string on the top of the stack frame
-    call ft_strlen                 ; rax = len of the rdi string
-    inc rax                         ; rax++ (\0)
-    mov rdi, rax                    ; move the length of the string to the rdi for allocation
-    call malloc                    ; allocate memory, resulting pointer is in the rax wrt ..plt - linux routine for external calls
-    cmp rax, 0                      ; check if the result of the allocation == NULL
-    je nullptr                      ; if yes, return the null pointer  
-    pop rdi
-    mov rsi, rdi
+    ; Preserve base pointer
+    push rbp
+    mov rbp, rsp
+
+    ; Preserve non-volatile registers
+    push rbx
+    push r12
+
+    ; Save the input string pointer
+    mov r12, rdi
+
+    ; Call ft_strlen
+    call ft_strlen WRT ..plt
+
+    ; Increment length for null terminator
+    inc rax
+
+    ; Prepare to call malloc
     mov rdi, rax
-    call ft_strcpy
+    call malloc WRT ..plt
+
+    ; Check if malloc returned NULL
+    test rax, rax
+    jz .malloc_fail
+
+    ; Prepare for ft_strcpy
+    mov rdi, rax  ; destination (newly allocated memory)
+    mov rsi, r12  ; source (original string)
+
+    ; Save return value (allocated memory pointer)
+    mov rbx, rax
+
+    ; Call ft_strcpy
+    call ft_strcpy WRT ..plt
+
+    ; Restore return value to rax
+    mov rax, rbx
+
+    ; Epilogue
+    pop r12
+    pop rbx
+    pop rbp
     ret
 
-nullptr:
-    xor rax, rax                    ; rax = 0
-    ret                             ; return NULL
-
-
-
-
-			
+.malloc_fail:
+    ; malloc failed, return NULL
+    xor rax, rax
+    pop r12
+    pop rbx
+    pop rbp
+    ret

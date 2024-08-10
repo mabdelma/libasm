@@ -6,43 +6,40 @@
 #    By: mabdelma <mabdelma@student.42abudhabi.ae>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/07 19:03:46 by mabdelma          #+#    #+#              #
-#    Updated: 2024/08/07 19:03:48 by mabdelma         ###   ########.fr        #
+#    Updated: 2024/08/10 20:05:10 by mabdelma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS        =  ft_strlen.s ft_strcmp.s ft_strcpy.s ft_write.s ft_read.s ft_strdup.s
-OBJS        =  $(SRCS:.s=.o)
+SRCS = ft_strlen.s ft_strcmp.s ft_strcpy.s ft_write.s ft_read.s ft_strdup.s
+OBJS = $(SRCS:.s=.o)
+ASM = nasm
+ASFLAGS = -f elf64
+CC = g++
+CFLAGS = -Wall -Werror -Wextra
+LDFLAGS = -L. -lasm
+NAME = libasm.a
+TEST = test
 
-ASM			=  nasm
-ASFLAGS		=  -f elf64 -DPIC
-CC			= g++
-CPPFLAGS    =  -Wall -Werror -Wextra -fPIE -no-pie
-LDFLAGS		=  -L. -lasm
-NAME        =  libasm.a
-TEST        =  test
+%.o: %.s
+	$(ASM) $(ASFLAGS) -o $@ $<
 
-%.o:	%.s
-			$(ASM) $(ASFLAGS) -o $@ $<
+all: $(NAME)
 
-all:	$(NAME)
-
-$(NAME):	$(OBJS)
-			ar rcs $(NAME) $(OBJS)
-			ranlib $(NAME)
-			rm -rf $(OBJS)
+$(NAME): $(OBJS)
+	ar rcs $(NAME) $(OBJS)
+	ranlib $(NAME)
 
 clean:
-			rm -rf $(OBJS) main.o
+	rm -f $(OBJS) main.o
 
-fclean:		clean
-			rm -rf $(NAME) $(TEST)
+fclean: clean
+	rm -f $(NAME) $(TEST)
 
-re:	fclean all
+re: fclean all
 
-test:	re
-			$(CC) $(CPPFLAGS) -nostartfiles -c main.cpp
-			$(CC) $(CPPFLAGS) -o $(TEST) main.o $(NAME) $(LDFLAGS)
-			./$(TEST)
+test: re
+	$(CC) $(CFLAGS) -c main.cpp
+	$(CC) $(CFLAGS) -o $(TEST) main.o $(NAME) $(LDFLAGS)
+	./$(TEST)
 
-.PHONY:	clean fclean re test
-
+.PHONY: clean fclean re test
